@@ -1,0 +1,1 @@
+export const selectPrizeDrawerList = state => state.follower.prizeDrawerList; 
