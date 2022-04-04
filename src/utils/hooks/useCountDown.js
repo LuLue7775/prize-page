@@ -25,7 +25,7 @@ export const formatTime = (secs) => {
 } 
 
 export default function useCountDown( userSetMin, userSetSec ) {
-    const {winner, setWinner} = useContext(WinnerContext);
+    const { setWinner } = useContext(WinnerContext);
     const prizeDrawers = useSelector(selectPrizeDrawerList)
 
     const userSetTime = useRef( convertTimeToSecs(userSetMin, userSetSec) )
@@ -39,6 +39,7 @@ export default function useCountDown( userSetMin, userSetSec ) {
     const startCount = () => {
         setIsStarted(true)
         setTimeStamp( new Date().getTime() )
+        setWinner({})
     }
     
     const setCount = () => {
