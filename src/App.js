@@ -8,7 +8,7 @@ function App() {
   return (
     <StyledAppWrapper className="App">
       <StyledHeader className="App-header">
-        <StyledTitle> Who's the winner?  </StyledTitle>
+        <StyledTitle> LUCKY DRAW  </StyledTitle>
       </StyledHeader>
 
       <WinnerModalView/>
@@ -25,7 +25,7 @@ export default App;
 
 const StyledAppWrapper = styled.div`
   text-align: center;
-  background: #f7f0e6;
+  background: rgb(255, 145, 154);
   height:100vh;
   overflow:hidden;
 
@@ -47,5 +47,7 @@ const StyledTitle =  styled.h1`
 `
 const StyledBody = styled.div`
   height:90vh;
-  
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 `

@@ -14,7 +14,7 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 0;  
+  width: 0px;  
 }
 
 @supports(-webkit-appearance: none) or (-moz-appearance: none) {

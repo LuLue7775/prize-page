@@ -78,7 +78,7 @@ const StyledFlip = styled.div`
 `
 const StyledForm = styled.form`
   padding:1em;
-  width:60%;
+  width:30%;
   margin: 0 auto;
 
   display:flex;

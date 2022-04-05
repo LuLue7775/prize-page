@@ -30,7 +30,7 @@ export default class Flip extends React.Component {
   render() {
     return (
       <StyledTick ref={this._tickRef} className="tick">
-        <div data-repeat="true" aria-hidden="true" data-transform="pad(00) -> split -> delay">
+        <div data-repeat="true" aria-hidden="true" data-transform="pad(00) -> split -> delay" style={{backgroundColor: "rgb(231, 240, 223)" }}>
           <span data-view="flip">Tick</span>
         </div>
       </StyledTick>
@@ -41,4 +41,5 @@ export default class Flip extends React.Component {
 
 const StyledTick = styled.div`
 font-size:1.2em;
+//  background-color: rgb(231, 240, 223) !important; 
 `
