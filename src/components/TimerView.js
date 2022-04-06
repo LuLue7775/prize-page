@@ -53,8 +53,8 @@ export default function TimerView() {
           <Flip value={displaySec}/>  
         </StyledFlip>
         <StyledForm className="time-input" onSubmit={handleSubmit} >
-          <StyledInput type='number' name='userInput' value={userInputMin} min='0' onChange={handleInputMin}/> Minutes
-          <StyledInput type='number' name='userInput' value={userInputSec} min='0' onChange={handleInputSec}/> Seconds
+          <StyledInput type='number' name='userInput' value={userInputMin} min='0' onChange={handleInputMin}/> Min
+          <StyledInput type='number' name='userInput' value={userInputSec} min='0' onChange={handleInputSec}/> Sec
           <StyledButton type="submit" value="Set and Start" />
         </StyledForm>
     </StyledTimerWrapper>
@@ -64,12 +64,8 @@ export default function TimerView() {
 
 const StyledTimerWrapper = styled.div`
   height: 150px;
-  // width:60%;
   margin: 0 auto;
   padding-top:1.5em;
-  // @media (max-width: 768px) {
-  //   width:50%;
-  // }
 `
 const StyledFlip = styled.div`
   display:inline-block;
@@ -78,25 +74,23 @@ const StyledFlip = styled.div`
 `
 const StyledForm = styled.form`
   padding:1em;
-  width:30%;
+  width:80%;
   margin: 0 auto;
 
   display:flex;
   justify-content: space-evenly ;
   align-items: center;
-  @media (max-width: 480px) {
-    height: 200px;
-    flex-direction: column;
-    
-  }
 `
 const StyledInput = styled.input`
   margin-left:1em;
   margin-right:1em;
-  max-width:60px;
+  width:100%;
+  min-width:40px;
+  max-width:120px;
   padding:1em;
-  border-radius: 11px;
+  box-sizing: border-box;    
 
+  border-radius: 11px;
   --focus: 2px rgba(39, 94, 254, .25);
   outline: none;
   transition: box-shadow .2s;
@@ -113,7 +107,9 @@ const StyledInput = styled.input`
 const StyledButton = styled.input`
   margin-left:1em;
   margin-right:1em;
-  width:100px;
+  max-width:100px;
+  width:100%;
+
   height:40px;
   border-radius: 11px;
   &:hover {

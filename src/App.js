@@ -49,5 +49,5 @@ const StyledBody = styled.div`
   height:90vh;
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  // justify-content:space-between;
 `
