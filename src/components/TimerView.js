@@ -8,7 +8,7 @@ import Flip from "./element/Flip";
 
 export default function TimerView() {
 
-  const [userInputMin, setUserInputMin] = useState(2 ) ;
+  const [userInputMin, setUserInputMin] = useState(2) ;
   const [userInputSec, setUserInputSec] = useState(0) ;
   const [displayMin, setDisplayMin] = useState(0);
   const [displaySec, setDisplaySec] = useState(0);
@@ -17,12 +17,12 @@ export default function TimerView() {
 
   const handleInputMin = e => {
     e.preventDefault();
-    setUserInputMin( e.target.value );
+    setUserInputMin(e.target.value);
   }
 
   const handleInputSec = e => {
     e.preventDefault();
-    setUserInputSec( e.target.value );  
+    setUserInputSec(e.target.value);  
   }
 
   const handleSubmit = e => {
