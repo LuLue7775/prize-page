@@ -32,31 +32,6 @@ export default function DrawerListContainer() {
 
   }, [])
 
-const {height} = useWindowSize();
-const [scrollTop, setScrollTop] = useState(0);
-const [items, setItems] = useState([]);
-
-const itemCount = fetchDrawers?.length || 0;
-const itemHeight = 80;
-const windowHeight = height*0.9 -200; 
-const innerHeight = useMemo(()=> itemCount*itemHeight, [itemCount, itemHeight] );
-  
-const startIndex = Math.floor(scrollTop/itemHeight); //to get current first item
-const endIndex = Math.min(
-  itemCount-1,
-  Math.floor((scrollTop + windowHeight)/itemHeight )
-)
-
-// console.log(startIndex, windowHeight)
-
-useEffect(() => {
-  const inViewItemList = [];
-
-  for(let i = startIndex; i <= endIndex; i++) {
-    inViewItemList.push()
-  }
-
-}, [ startIndex, endIndex, itemHeight ])
 
   return (
     <StyledList className="drawer-list">
