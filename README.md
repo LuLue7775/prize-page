@@ -6,7 +6,7 @@ This is a prize drawing app built with React and Redux. Written in Container/Vie
 
 ![](https://media3.giphy.com/media/DhjRqTTRtlxQ12JaRb/giphy.gif?cid=790b7611b5047806d91a285dab8599d968719ceb3bcd51e8&rid=giphy.gif&ct=g)
 
-view live[Create React App](https://prize-page.vercel.app).
+[view live](https://prize-page.vercel.app).
 
 ### To run locally
 
