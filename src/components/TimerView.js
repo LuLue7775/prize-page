@@ -8,8 +8,8 @@ import Flip from "./element/Flip";
 
 export default function TimerView() {
 
-  const [userInputMin, setUserInputMin] = useState(2);
-  const [userInputSec, setUserInputSec] = useState(0);
+  const [userInputMin, setUserInputMin] = useState(2 ) ;
+  const [userInputSec, setUserInputSec] = useState(0) ;
   const [displayMin, setDisplayMin] = useState(0);
   const [displaySec, setDisplaySec] = useState(0);
 
@@ -53,8 +53,8 @@ export default function TimerView() {
           <Flip value={displaySec}/>  
         </StyledFlip>
         <StyledForm className="time-input" onSubmit={handleSubmit} >
-          <StyledInput type='number' name='userInput' value={userInputMin} min='0' onChange={handleInputMin}/> Min
-          <StyledInput type='number' name='userInput' value={userInputSec} min='0' onChange={handleInputSec}/> Sec
+          <StyledInput type='number' name='userInput' value={userInputMin} min='0' onChange={handleInputMin} required/> Min
+          <StyledInput type='number' name='userInput' value={userInputSec} min='0' onChange={handleInputSec} required/> Sec
           <StyledButton type="submit" value="Set and Start" />
         </StyledForm>
     </StyledTimerWrapper>

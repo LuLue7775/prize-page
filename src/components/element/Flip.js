@@ -19,7 +19,7 @@ export default class Flip extends React.Component {
 
   componentDidUpdate() {
     if (!this._tickInstance) return;
-    this._tickInstance.value = this.props.value;
+    this._tickInstance.value = this.props.value || 0;
   }
 
   componentWillUnmount() {

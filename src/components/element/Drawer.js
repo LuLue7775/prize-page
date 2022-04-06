@@ -49,10 +49,10 @@ const StyledDetail = styled.div`
     padding-left:2em;
 `
 const StyledName = styled.div`
-  font-size:1.2em;
+  font-size:12px;
   font-weight:bold;
 `
 const StyledAccount = styled.div`
-  font-size:.8em;
+  font-size:10px;
 `
 

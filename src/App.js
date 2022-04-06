@@ -25,7 +25,7 @@ export default App;
 
 const StyledAppWrapper = styled.div`
   text-align: center;
-  background: rgb(255, 145, 154);
+  background: rgb(252, 173, 54);
   height:100vh;
   overflow:hidden;
 
@@ -44,6 +44,7 @@ const StyledHeader = styled.div`
 
 const StyledTitle =  styled.h1`
   margin:0;
+  font-size:40px;
 `
 const StyledBody = styled.div`
   height:90vh;

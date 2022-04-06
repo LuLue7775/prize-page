@@ -1,13 +1,10 @@
-import React, { useEffect, 
-    useMemo, useCallback, useState, CSSProperties, ReactElement } from 'react';
+import React, { useEffect } from 'react';
 import useWindowSize from '../utils/hooks/useWindowSize';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPrizeDrawerList } from '../redux/follower/follower.selector'
 import { setPrizeFollower } from '../redux/follower/follower.action'
 
-import Drawer from './element/Drawer';
-
-
+import DrawerListView from './DrawerListView';
 import styled from "styled-components";
 
 
@@ -37,15 +34,7 @@ export default function DrawerListContainer() {
     <StyledList className="drawer-list">
       {
         prizeDrawers?.map( drawer => 
-          <StyledDrawers key={drawer?.login?.uuid } > 
-              <Drawer 
-                name={drawer?.name?.first + ` ` + drawer?.name?.last } 
-                picture={drawer?.picture?.thumbnail}
-                account={drawer?.login?.username}
-                email={drawer?.email}
-              />
-            
-          </StyledDrawers>
+          <DrawerListView drawer={drawer} />
         )
       }
     </StyledList>
@@ -55,10 +44,9 @@ export default function DrawerListContainer() {
 const StyledList = styled.div`
   width:80%;
   height: calc(100% - 200px); 
-  // height: 400px; 
   margin:0  auto;
   margin-bottom:50px;
-
+  
   padding-top:2px;
   overflow-y: scroll;
 
@@ -70,8 +58,3 @@ const StyledList = styled.div`
   }
 `
 
-const StyledDrawers = styled.div`
-  padding:10px;
-  display: flex;
-  justify-content:center;
-`
