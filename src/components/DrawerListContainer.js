@@ -49,12 +49,9 @@ const StyledList = styled.div`
   
   padding-top:2px;
   overflow-y: scroll;
-
   border-radius:20px;
   background-color:rgb(255, 207, 232, 0.5);
-
   @media (max-width: 480px) {
     height: calc(100% - 270px); 
   }
 `
-
