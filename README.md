@@ -16,12 +16,12 @@ This is a prize drawing app built with React and Redux. Written in Container/Vie
 3. `npm run start`
 
 
-*Latest Update*
+### *Latest Update*
 Performance bug fixes:
-([x]) 沒有使用的套件，請從 package.json 移除
-([x]) 題目是要求使用redux 但是資料傳遞主軸是採用context api
-([x]) 時間輸入超過59分鐘之後 呈現上會錯誤
-([x]) 倒數計時會re-render很嚴重
+- [x] 沒有使用的套件，請從 package.json 移除
+- [x] 題目是要求使用redux 但是資料傳遞主軸是採用context api
+- [x] 時間輸入超過59分鐘之後 呈現上會錯誤
+- [x] 倒數計時會re-render很嚴重
   - useCountDown slipt remainTime dependency
   - pull displayTime from TimerView into useCountDown , make them useRef instead of useState
   - re-arranged startCount() and remove setCount(), depend [userSetMin, userSetSec ] in useCount
