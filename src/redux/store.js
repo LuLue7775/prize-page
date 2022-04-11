@@ -1,13 +1,9 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-// import {logger} from './middleware/logger';
-import thunk from 'redux-thunk';
-
 import { rootReducer } from './root-reducer';
 
 const middleWares = [
-  process.env.NODE_ENV === 'development' && logger,
-  thunk,
+  process.env.NODE_ENV === 'development' && logger
 ].filter(Boolean);
 
 const composeEnhancer = (process.env.NODE_ENV !== 'production' &&

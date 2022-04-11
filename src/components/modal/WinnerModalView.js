@@ -1,22 +1,24 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import Confetti from 'react-confetti';
 import useWindowSize from '../../utils/hooks/useWindowSize';
 
-import { WinnerContext } from '../../context/winner.context'
+import { useSelector, shallowEqual } from 'react-redux';
+import { selectPrizeWinner } from '../../redux/follower/follower.selector';
 
 import styled, { keyframes } from "styled-components";
 
 export default function WinnerModalView() {
     const { width, height } = useWindowSize();
 
-    const { winner } = useContext(WinnerContext);
+    const winner = useSelector(selectPrizeWinner, shallowEqual);
     const [ isModalShown, setShown ] = useState(false);
 
     const modalRef = useRef();
     const hasWinner = useRef(false);
 
     useEffect(() => {
-      if ( Object.keys(winner).length === 0 ) return
+      if ( !winner || Object.keys(winner).length === 0 ) return;
+
       hasWinner.current = true;
       modalRef.current.style.opacity = 1;
       setShown(true);

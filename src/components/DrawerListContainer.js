@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useWindowSize from '../utils/hooks/useWindowSize';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPrizeDrawerList } from '../redux/follower/follower.selector'
 import { setPrizeFollower } from '../redux/follower/follower.action'
@@ -16,11 +16,11 @@ const fetchDrawers = async() => {
     return response 
 }
 
-
-
 export default function DrawerListContainer() {
+
   const dispatch = useDispatch();
   const prizeDrawers = useSelector(selectPrizeDrawerList);
+  
   useEffect(() => {
     fetchDrawers().then( drawers =>{
         dispatch(setPrizeFollower(drawers.results))
@@ -29,12 +29,11 @@ export default function DrawerListContainer() {
 
   }, [])
 
-
   return (
     <StyledList className="drawer-list">
       {
         prizeDrawers?.map( drawer => 
-          <DrawerListView drawer={drawer} />
+          <DrawerListView drawer={drawer} key={drawer?.login?.uuid} />
         )
       }
     </StyledList>

@@ -1,13 +1,11 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
-import { WinnerContext } from '../../context/winner.context'
-import { useSelector } from 'react-redux'
+import { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { selectPrizeDrawerList } from '../../redux/follower/follower.selector'
-
+import { selectPrizeDrawerList } from '../../redux/follower/follower.selector';
+import { setPrizeWinner } from '../../redux/follower/follower.action';
 
 const convertTimeToSecs = ( userSetMin, userSetSec ) => {
-
-    return  parseInt(userSetMin, 10)*60 + parseInt(userSetSec, 10)
+    return  parseInt(userSetMin, 10)*60 + parseInt(userSetSec, 10);
 }
 
 export const formatTime = (secs) => {
@@ -24,52 +22,66 @@ export const formatTime = (secs) => {
     return obj;
 } 
 
-export default function useCountDown( userSetMin, userSetSec ) {
-    const { setWinner } = useContext(WinnerContext);
-    const prizeDrawers = useSelector(selectPrizeDrawerList)
+export default function useCountDown( userSetMin, userSetSec) {
+    const dispatch = useDispatch();
+    const prizeDrawers = useSelector(selectPrizeDrawerList);
 
-    const userSetTime = useRef( convertTimeToSecs(userSetMin, userSetSec) )
-        
-    const [ startTimeStamp, setTimeStamp ] = useState()
-    const [ remainTime, setRemainTime ] = useState( userSetTime.current )
-    
-    const [ isStarted , setIsStarted ] = useState(false)
-    const intervalId = useRef(0) 
+    const [ isStarted , setIsStarted ] = useState(false);
+    const intervalId = useRef(0);
+    const [ startTimeStamp, setTimeStamp ] = useState();
+    const userSetTime = useRef( convertTimeToSecs(userSetMin, userSetSec) );
+    const [ remainTime, setRemainTime ] = useState( userSetTime.current );
+    const displayMinRef = useRef();
+    const displaySecRef = useRef();
+
 
     const startCount = () => {
-        setIsStarted(true)
-        setTimeStamp( new Date().getTime() )
-        setWinner({})
-    }
-    
-    const setCount = () => {
-        userSetTime.current = convertTimeToSecs(userSetMin, userSetSec)
-        setRemainTime(userSetTime.current)
+        userSetTime.current = convertTimeToSecs(userSetMin, userSetSec);
+        setRemainTime(userSetTime.current);
+        setIsStarted(true);
+        setTimeStamp( new Date().getTime() );
+        dispatch(setPrizeWinner({}));
     }
 
+    const stopCount = () => {
+        setIsStarted(false);
+    }
+    
     useEffect(() => {
-        if (!isStarted) return
+        stopCount();
+    }, [userSetMin, userSetSec]);
+
+    useEffect(() => {
+        if (!isStarted) return;
 
         intervalId.current = setInterval( () => {
             isStarted && 
             remainTime > 0 && 
             setRemainTime( userSetTime.current - Math.floor((new Date().getTime() - startTimeStamp) / 1000), 1000 ); 
-        } )
-        
-        if ( remainTime === 0 ) {
-            clearInterval(intervalId.current);
-            setIsStarted(false)
-            setRemainTime(userSetTime.current)
-            
-            
-            setWinner( prizeDrawers[ Math.floor(Math.random()*prizeDrawers.length) ] )
-        }
+        } );
 
         return () => clearInterval(intervalId.current);
-    }, [ isStarted, remainTime ])
+    }, [ isStarted,  prizeDrawers ]);
 
+    useEffect(() => {
+        if (!isStarted) return;
+
+        if ( remainTime === 0 ) {
+            clearInterval(intervalId.current);
+            setIsStarted(false);
+            setRemainTime(userSetTime.current);
+            
+            dispatch(setPrizeWinner( prizeDrawers[ Math.floor(Math.random()*prizeDrawers.length) ] ));
+            return;
+        };
+
+        const formatted = formatTime(remainTime);
+        displayMinRef.current = formatted.m;
+        displaySecRef.current = formatted.s;
+
+    }, [remainTime])
 
     
 
-    return [ remainTime, isStarted,  setCount, startCount ]
+    return [  startCount, displayMinRef.current, displaySecRef.current ]
 }

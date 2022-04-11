@@ -12,7 +12,7 @@ export default function useEventListener(eventType, callback, element = window) 
         const handler = e => callbackRef.current(e)
         element.addEventListener(eventType, handler)
 
-        return () => element.removeEventListner(eventType, handler)
+        return () => element?.removeEventListner(eventType, handler)
     }, [eventType, element])
 
 }

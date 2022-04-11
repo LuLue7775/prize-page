@@ -8,12 +8,10 @@ import Flip from "./element/Flip";
 
 export default function TimerView() {
 
-  const [userInputMin, setUserInputMin] = useState(2) ;
-  const [userInputSec, setUserInputSec] = useState(0) ;
-  const [displayMin, setDisplayMin] = useState(0);
-  const [displaySec, setDisplaySec] = useState(0);
+  const [userInputMin, setUserInputMin] = useState('2') ;
+  const [userInputSec, setUserInputSec] = useState('0') ;
 
-  const [ remainTime, isStarted,  setCount, startCount  ] = useCountDown( userInputMin, userInputSec );
+  const [ startCount, displayMin, displaySec  ] = useCountDown( userInputMin, userInputSec );
 
   const handleInputMin = e => {
     e.preventDefault();
@@ -27,19 +25,9 @@ export default function TimerView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    startCount( userInputMin, userInputSec );
+    startCount();
   }
 
-  useEffect(() => {
-    setCount( userInputMin, userInputSec );
-    
-  }, [userInputMin, userInputSec]);
-
-  useEffect(() => {
-    const formatted = formatTime(remainTime);
-    setDisplayMin( formatted.m );
-    setDisplaySec( formatted.s );
-  }, [remainTime]);
   return (
     <StyledTimerWrapper className="timer-wrapper">
 
@@ -53,8 +41,8 @@ export default function TimerView() {
           <Flip value={displaySec}/>  
         </StyledFlip>
         <StyledForm className="time-input" onSubmit={handleSubmit} >
-          <StyledInput type='number' name='userInput' value={userInputMin} min='0' onChange={handleInputMin} required/> Min
-          <StyledInput type='number' name='userInput' value={userInputSec} min='0' onChange={handleInputSec} required/> Sec
+          <StyledInput type='number' name='userInput' value={userInputMin} min='0' max='59' onChange={handleInputMin} required/> Min
+          <StyledInput type='number' name='userInput' value={userInputSec} min='0' max='59' onChange={handleInputSec} required/> Sec
           <StyledButton type="submit" value="Set and Start" />
         </StyledForm>
     </StyledTimerWrapper>
