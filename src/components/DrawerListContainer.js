@@ -2,19 +2,13 @@ import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPrizeDrawerList } from '../redux/follower/follower.selector'
-import { setPrizeFollower } from '../redux/follower/follower.action'
+import { setPrizeFollower, fetchDrawersStartAsync } from '../redux/follower/follower.action'
 
 import DrawerListView from './DrawerListView';
 import styled from "styled-components";
 
 
-const fetchDrawers = async() => {
-    const response = await fetch(`https://randomuser.me/api/?results=${ Math.floor(Math.random()*20)}`, { dataType: 'json'})
-                  .then(res => res.json())
-                  .then(json => { return json})
-                  .catch(err => { throw(err) })
-    return response 
-}
+
 
 export default function DrawerListContainer() {
 
@@ -22,11 +16,7 @@ export default function DrawerListContainer() {
   const prizeDrawers = useSelector(selectPrizeDrawerList);
   
   useEffect(() => {
-    fetchDrawers().then( drawers =>{
-        dispatch(setPrizeFollower(drawers.results))
-        return drawers
-    }).catch(err => console.log(err) )
-
+    dispatch(fetchDrawersStartAsync())
   }, [])
 
   return (
