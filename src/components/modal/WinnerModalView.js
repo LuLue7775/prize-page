@@ -37,13 +37,9 @@ export default function WinnerModalView() {
         <StyledModal ref={modalRef} className="modal" isModalShown={isModalShown} hasWinner={hasWinner}>
           <StyledTitle> We have a winner! </StyledTitle> 
           <img src={winner?.picture?.large} alt="drawer" height="150px" width="150px"/>
- 
           <StyledDetail> {winner?.name?.first+ ` ` + winner?.name?.last} </StyledDetail>
           <StyledDetail> @{winner?.login?.username} </StyledDetail>
           <StyledTitle> CONGRATS! </StyledTitle> 
-          
-
-
         </StyledModal> 
         </StyledHide>
 

@@ -60,6 +60,7 @@ export default function useCountDown( userSetMin, userSetSec) {
             setRemainTime( userSetTime.current - Math.floor((new Date().getTime() - startTimeStamp) / 1000), 1000 ); 
         } );
 
+
         return () => clearInterval(intervalId.current);
     }, [ isStarted,  prizeDrawers ]);
 
@@ -78,6 +79,7 @@ export default function useCountDown( userSetMin, userSetSec) {
         const formatted = formatTime(remainTime);
         displayMinRef.current = formatted.m;
         displaySecRef.current = formatted.s;
+                        console.log('set')
 
     }, [remainTime])
 

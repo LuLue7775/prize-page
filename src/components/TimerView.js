@@ -30,13 +30,10 @@ export default function TimerView() {
 
   return (
     <StyledTimerWrapper className="timer-wrapper">
-
         <StyledFlip> 
           <Flip value={displayMin}/>  
         </StyledFlip>
-        <StyledFlip> 
-          :
-        </StyledFlip>
+        <StyledFlip> : </StyledFlip>
         <StyledFlip>
           <Flip value={displaySec}/>  
         </StyledFlip>

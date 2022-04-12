@@ -24,10 +24,6 @@ Performance bug fixes:
 - [x] 倒數計時會re-render很嚴重
   - useCountDown slipt remainTime dependency
   - pull displayTime from TimerView into useCountDown , make them useRef instead of useState
-  - re-arranged startCount() and remove setCount(), depend [userSetMin, userSetSec] in useCount
+  - re-arranged startCount() and remove setCount(), depend [userSetMin, userSetSec ] in useCount
   - winnerModelView: referential issue
-  - extra change: stop counting when userInput changes.
-   
-  ![1649702725445](https://user-images.githubusercontent.com/37790017/162808504-dfed70a1-8104-467f-af2a-93938f8c72ef.jpg)
- 
 
