@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectPrizeDrawerList } from '../../redux/follower/follower.selector';
@@ -22,34 +22,31 @@ export const formatTime = (secs) => {
     return obj;
 } 
 
-export default function useCountDown( userSetMin, userSetSec) {
+export default function useCountDown( ) {
     const dispatch = useDispatch();
     const prizeDrawers = useSelector(selectPrizeDrawerList);
 
     const [ isStarted , setIsStarted ] = useState(false);
     const intervalId = useRef(0);
     const [ startTimeStamp, setTimeStamp ] = useState();
-    const userSetTime = useRef( convertTimeToSecs(userSetMin, userSetSec) );
+    const userSetTime = useRef( );
+    // const userSetTime = useRef( convertTimeToSecs(userSetMin, userSetSec) );
     const [ remainTime, setRemainTime ] = useState( userSetTime.current );
     const displayMinRef = useRef();
     const displaySecRef = useRef();
 
 
-    const startCount = () => {
+    const startCount = useCallback((userSetMin, userSetSec) => {
         userSetTime.current = convertTimeToSecs(userSetMin, userSetSec);
         setRemainTime(userSetTime.current);
         setIsStarted(true);
         setTimeStamp( new Date().getTime() );
         dispatch(setPrizeWinner({}));
-    }
+    }, [])
 
-    const stopCount = () => {
+    const stopCount = useCallback(() => {
         setIsStarted(false);
-    }
-    
-    useEffect(() => {
-        stopCount();
-    }, [userSetMin, userSetSec]);
+    },[])
 
     useEffect(() => {
         if (!isStarted) return;
@@ -59,8 +56,6 @@ export default function useCountDown( userSetMin, userSetSec) {
             remainTime > 0 && 
             setRemainTime( userSetTime.current - Math.floor((new Date().getTime() - startTimeStamp) / 1000), 1000 ); 
         } );
-
-
         return () => clearInterval(intervalId.current);
     }, [ isStarted,  prizeDrawers ]);
 
@@ -77,13 +72,12 @@ export default function useCountDown( userSetMin, userSetSec) {
         };
 
         const formatted = formatTime(remainTime);
-        displayMinRef.current = formatted.m;
         displaySecRef.current = formatted.s;
-                        console.log('set')
+        displayMinRef.current = formatted.m;
 
     }, [remainTime])
 
     
 
-    return [  startCount, displayMinRef.current, displaySecRef.current ]
+    return [  startCount, stopCount, displayMinRef.current, displaySecRef.current ]
 }
