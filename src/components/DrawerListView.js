@@ -1,24 +1,27 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Drawer from './element/Drawer';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export default function DrawerListView({drawer}) {
+export default function DrawerListView({ drawer }) {
   return (
-      <StyledDrawers key={drawer?.login?.uuid } > 
-        <Drawer 
-          name={drawer?.name?.first + ` ` + drawer?.name?.last } 
-          picture={drawer?.picture?.thumbnail}
-          account={drawer?.login?.username}
-          email={drawer?.email}
-        />
-      
+    <StyledDrawers>
+      <Drawer
+        name={drawer?.name?.first + ` ` + drawer?.name?.last}
+        picture={drawer?.picture?.thumbnail}
+        account={drawer?.login?.username}
+        email={drawer?.email}
+      />
     </StyledDrawers>
   );
 }
 
+DrawerListView.propTypes = {
+  drawer: PropTypes.object
+};
+
 const StyledDrawers = styled.div`
-  padding:10px;
+  padding: 10px;
   display: flex;
-  justify-content:center;
-`
+  justify-content: center;
+`;

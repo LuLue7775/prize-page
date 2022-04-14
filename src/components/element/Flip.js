@@ -1,9 +1,8 @@
-import React from "react";
-
-import Tick from "@pqina/flip";
-import "@pqina/flip/dist/flip.min.css";
-import styled from "styled-components";
-
+import React from 'react';
+import PropTypes from 'prop-types';
+import Tick from '@pqina/flip';
+import '@pqina/flip/dist/flip.min.css';
+import styled from 'styled-components';
 
 export default class Flip extends React.Component {
   constructor(props) {
@@ -30,7 +29,11 @@ export default class Flip extends React.Component {
   render() {
     return (
       <StyledTick ref={this._tickRef} className="tick">
-        <div data-repeat="true" aria-hidden="true" data-transform="pad(00) -> split -> delay" style={{backgroundColor: "rgb(231, 240, 223)" }}>
+        <div
+          data-repeat="true"
+          aria-hidden="true"
+          data-transform="pad(00) -> split -> delay"
+          style={{ backgroundColor: 'rgb(231, 240, 223)' }}>
           <span data-view="flip">Tick</span>
         </div>
       </StyledTick>
@@ -38,8 +41,11 @@ export default class Flip extends React.Component {
   }
 }
 
+Flip.propTypes = {
+  value: PropTypes.number
+};
 
 const StyledTick = styled.div`
-font-size:1.2em;
-//  background-color: rgb(231, 240, 223) !important; 
-`
+  font-size: 1.2em;
+  //  background-color: rgb(231, 240, 223) !important;
+`;
