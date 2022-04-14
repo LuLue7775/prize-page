@@ -56,7 +56,7 @@ export default function useCountDown() {
         );
     });
     return () => clearInterval(intervalId.current);
-  }, [isStarted, prizeDrawers, startTimeStamp]);
+  }, [isStarted, startTimeStamp]);
 
   useEffect(() => {
     if (!isStarted) return;
