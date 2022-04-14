@@ -16,6 +16,13 @@ This is a prize drawing app built with React and Redux. Written in Container/Vie
 
 ### _Latest Update_
 
+Updated Bug fixes:
+- [x] 避免useCountDown不必要的setState
+  - 已簡化hooks使用，並將不需要useRef的調整成區域變數
+- 另外加入 prettier format程式碼
+- 取消DrawListContainer不必要的DOM manipulation
+
+---
 Performance bug fixes:
 
 - [x] 沒有使用的套件，請從 package.json 移除
