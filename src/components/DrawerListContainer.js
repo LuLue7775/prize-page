@@ -18,7 +18,7 @@ export default function DrawerListContainer() {
   return (
     <StyledList className="drawer-list">
       {prizeDrawers?.map((drawer) => (
-        <DrawerListView drawer={drawer} key={drawer?.login?.uuid} />
+        <DrawerListView drawer={drawer} key={drawer.login.uuid} />
       ))}
     </StyledList>
   );
