@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import useWindowSize from '../../utils/hooks/useWindowSize';
 
@@ -13,32 +13,24 @@ export default function WinnerModalView() {
   const winner = useSelector(selectPrizeWinner, shallowEqual);
   const [isModalShown, setShown] = useState(false);
 
-  const modalRef = useRef();
-  const hasWinner = useRef(false);
+  let hasWinner = false;
 
   useEffect(() => {
     if (!winner || Object.keys(winner).length === 0) return;
 
-    hasWinner.current = true;
-    modalRef.current.style.opacity = 1;
+    hasWinner = true;
     setShown(true);
 
     setTimeout(() => {
-      modalRef.current.style.opacity = 0;
       setShown(false);
-      hasWinner.current = false;
+      hasWinner = false;
     }, 3000);
   }, [winner]);
 
   return (
     <StyledModalWrapper className="modal-wrapper">
       <StyledHide>
-        <StyledModal
-          ref={modalRef}
-          className="modal"
-          isModalShown={isModalShown}
-          hasWinner={hasWinner}
-        >
+        <StyledModal className="modal" isModalShown={isModalShown} hasWinner={hasWinner}>
           <StyledTitle> We have a winner! </StyledTitle>
           <img src={winner?.picture?.large} alt="drawer" height="150px" width="150px" />
           <StyledDetail> {winner?.name?.first + ` ` + winner?.name?.last} </StyledDetail>
@@ -77,7 +69,6 @@ const StyledHide = styled.div`
   overflow: hidden;
 `;
 const StyledModal = styled.div`
-  opacity: 0;
   position: absolute;
   z-index: 99;
 
@@ -93,11 +84,13 @@ const StyledModal = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
 
-  animation-name: ${({ isModalShown, hasWinner }) =>
-    isModalShown !== null && hasWinner.current && (isModalShown ? openAnimation : closeAnimation)};
+  animation-name: ${({ isModalShown }) => (isModalShown ? openAnimation : closeAnimation)};
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
   animation-iteration-count: 1;
+
+  opacity: ${({ isModalShown }) => (isModalShown ? 1 : 0)};
+  transition: opacity 0.6s linear;
 
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background: rgb(175, 222, 250);

@@ -27,11 +27,8 @@ export default function useCountDown() {
 
   const intervalId = useRef(0);
   const userSetTime = useRef();
-  // const userSetTime = useRef( convertTimeToSecs(userSetMin, userSetSec) );
   let displayMin = 0;
   let displaySec = 0;
-  // const displayMinRef = useRef();
-  // const displaySecRef = useRef();
   const [isStarted, setIsStarted] = useState(false);
   const [startTimeStamp, setTimeStamp] = useState();
   const [remainTime, setRemainTime] = useState(userSetTime.current);
@@ -53,14 +50,13 @@ export default function useCountDown() {
 
     intervalId.current = setInterval(() => {
       isStarted &&
-        remainTime > 0 &&
         setRemainTime(
           userSetTime.current - Math.floor((new Date().getTime() - startTimeStamp) / 1000),
           1000
         );
     });
     return () => clearInterval(intervalId.current);
-  }, [isStarted, prizeDrawers]);
+  }, [isStarted, prizeDrawers, startTimeStamp]);
 
   useEffect(() => {
     if (!isStarted) return;
@@ -68,7 +64,6 @@ export default function useCountDown() {
     if (remainTime === 0) {
       clearInterval(intervalId.current);
       setIsStarted(false);
-      // setRemainTime(userSetTime.current);
       setRemainTime(0);
 
       dispatch(setPrizeWinner(prizeDrawers[Math.floor(Math.random() * prizeDrawers.length)]));
