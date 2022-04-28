@@ -35,7 +35,6 @@ export default function useCountDown() {
 
   const startCount = (userSetMin, userSetSec) => {
     userSetTime.current = convertTimeToSecs(userSetMin, userSetSec);
-    console.log(userSetMin, userSetSec);
     setRemainTime(userSetTime.current);
     setIsStarted(true);
     setTimeStamp(new Date().getTime());

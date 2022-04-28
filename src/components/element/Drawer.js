@@ -45,6 +45,10 @@ const StyledWrapper = styled.div`
     height: 20px;
     border-radius: 10px;
   }
+  @media (max-height: 350px) {
+    height: 20px;
+    border-radius: 10px;
+  }
 `;
 
 const StyledPicture = styled.div`
@@ -56,6 +60,12 @@ const StyledPicture = styled.div`
   }
 
   @media (max-width: 480px) {
+    img {
+      height: 25px;
+      width: 25px;
+    }
+  }
+  @media (max-height: 350px) {
     img {
       height: 25px;
       width: 25px;

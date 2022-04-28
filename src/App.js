@@ -26,9 +26,10 @@ export default App;
 const StyledAppWrapper = styled.div`
   text-align: center;
   background: rgb(252, 173, 54);
-  height: 100vh;
+  height: 100vh; /*給 Safari 以外的瀏覽器讀取*/
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
   overflow: hidden;
-
   display: grid;
   align-content: space-between;
   gap: 0;

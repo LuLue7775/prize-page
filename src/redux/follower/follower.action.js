@@ -18,6 +18,7 @@ export const fetchDrawersStartAsync = () => {
         .then((json) => {
           return json;
         });
+
       dispatch(setPrizeFollowerSuccess(response.results));
     } catch (error) {
       dispatch(setPrizeFollowerFailure(error));
