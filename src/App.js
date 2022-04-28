@@ -27,19 +27,12 @@ const StyledAppWrapper = styled.div`
   text-align: center;
   background: rgb(252, 173, 54);
   height: 100vh;
-  height: calc(var(--vh, 1vh) * 100); /*for Safari*/
+
   width: 100%;
   overflow: hidden;
   display: grid;
   align-content: space-between;
   gap: 0;
-
-  @media (max-width: 480px) {
-    position: fixed;
-  }
-  @media (max-height: 350px) {
-    position: fixed;
-  }
 `;
 
 const StyledHeader = styled.div`
