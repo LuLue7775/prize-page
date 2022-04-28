@@ -36,9 +36,9 @@ const TimerInput = ({ startCount }) => {
         value={data.inputMin}
         onChange={handleChange('inputMin')}
         required
-        // min="0"
-        // max="59"
-        // type="number"
+        min="0"
+        max="59"
+        type="number"
       />
       {/* Min */}
       <StyledInput
@@ -46,9 +46,9 @@ const TimerInput = ({ startCount }) => {
         value={data.inputSec}
         onChange={handleChange('inputSec')}
         required
-        // min="0"
-        // max="59"
-        // type="number"
+        min="0"
+        max="59"
+        type="number"
       />
       {/* Sec */}
       <StyledButton type="submit" value="Set and Start" />
