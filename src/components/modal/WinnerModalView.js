@@ -50,7 +50,7 @@ const openAnimation = keyframes`
 `;
 
 const closeAnimation = keyframes`
-    0% { transform:translate(-50%, -50%);  opacity: 1; }
+    0% { transform:translate(-50%, -50%);  opacity: 0; }
     100% { transform:translate(-50%, -150%); opacity: 0; }
 `;
 
@@ -69,6 +69,9 @@ const StyledHide = styled.div`
   overflow: hidden;
 `;
 const StyledModal = styled.div`
+  opacity: ${({ isModalShown }) => (isModalShown ? 1 : 0)};
+  transition: opacity 0.6s linear;
+
   position: absolute;
   z-index: 99;
 
@@ -84,13 +87,11 @@ const StyledModal = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
 
-  animation-name: ${({ isModalShown }) => (isModalShown ? openAnimation : closeAnimation)};
+  animation-name: ${({ isModalShown, hasWinner }) =>
+    isModalShown ? openAnimation : hasWinner && closeAnimation};
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-  animation-iteration-count: 1;
-
-  opacity: ${({ isModalShown }) => (isModalShown ? 1 : 0)};
-  transition: opacity 0.6s linear;
+  // animation-iteration-count: 1;
 
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background: rgb(175, 222, 250);

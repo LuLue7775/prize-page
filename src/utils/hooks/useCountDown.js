@@ -27,14 +27,15 @@ export default function useCountDown() {
 
   const intervalId = useRef(0);
   const userSetTime = useRef();
-  let displayMin = 0;
-  let displaySec = 0;
+  const displayMinRef = useRef();
+  const displaySecRef = useRef();
   const [isStarted, setIsStarted] = useState(false);
   const [startTimeStamp, setTimeStamp] = useState();
   const [remainTime, setRemainTime] = useState(userSetTime.current);
 
   const startCount = (userSetMin, userSetSec) => {
     userSetTime.current = convertTimeToSecs(userSetMin, userSetSec);
+    console.log(userSetMin, userSetSec);
     setRemainTime(userSetTime.current);
     setIsStarted(true);
     setTimeStamp(new Date().getTime());
@@ -51,10 +52,9 @@ export default function useCountDown() {
     intervalId.current = setInterval(() => {
       isStarted &&
         setRemainTime(
-          userSetTime.current - Math.floor((new Date().getTime() - startTimeStamp) / 1000),
-          1000
+          userSetTime.current - Math.floor((new Date().getTime() - startTimeStamp) / 1000)
         );
-    });
+    }, 1000);
     return () => clearInterval(intervalId.current);
   }, [isStarted, startTimeStamp]);
 
@@ -71,9 +71,9 @@ export default function useCountDown() {
     }
 
     const formatted = formatTime(remainTime);
-    displaySec = formatted.s;
-    displayMin = formatted.m;
+    displaySecRef.current = formatted.s;
+    displayMinRef.current = formatted.m;
   }, [remainTime]);
 
-  return [startCount, stopCount, displayMin, displaySec];
+  return [startCount, stopCount, displayMinRef.current, displaySecRef.current];
 }

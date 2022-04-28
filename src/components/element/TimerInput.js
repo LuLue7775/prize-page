@@ -1,54 +1,59 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
+import { useValidation } from '../../utils/hooks/useValidation';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const TimerInput = ({ startCount, stopCount }) => {
-  const [userInputMin, setUserInputMin] = useState('2');
-  const [userInputSec, setUserInputSec] = useState('0');
-
-  const handleInputMin = (e) => {
-    e.preventDefault();
-    setUserInputMin(e.target.value);
-  };
-
-  const handleInputSec = (e) => {
-    e.preventDefault();
-    setUserInputSec(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    startCount(userInputMin, userInputSec);
-  };
+const TimerInput = ({ startCount }) => {
+  const { data, handleChange, handleSubmit, errors, isValid } = useValidation({
+    validations: {
+      inputMin: {
+        pattern: {
+          value: '^[0-5]?[0-9]$',
+          message: 'put in number 0-59'
+        }
+      },
+      inputSec: {
+        pattern: {
+          value: '^[0-5]?[0-9]$',
+          message: 'put in number 0-59'
+        }
+      }
+    }
+  });
 
   useEffect(() => {
-    stopCount();
-  }, [userInputMin, userInputSec]);
+    if (!isValid) return;
+
+    startCount(data.inputMin, data.inputSec);
+  }, [isValid]);
 
   return (
     <StyledForm className="time-input" onSubmit={handleSubmit}>
       <StyledInput
-        type="number"
         name="userInputMin"
-        value={userInputMin}
-        onChange={handleInputMin}
-        min="0"
-        max="59"
+        value={data.inputMin}
+        onChange={handleChange('inputMin')}
         required
-      />{' '}
-      Min
+        // min="0"
+        // max="59"
+        // type="number"
+      />
+      {/* Min */}
       <StyledInput
-        type="number"
         name="userInputSec"
-        value={userInputSec}
-        onChange={handleInputSec}
-        min="0"
-        max="59"
+        value={data.inputSec}
+        onChange={handleChange('inputSec')}
         required
-      />{' '}
-      Sec
+        // min="0"
+        // max="59"
+        // type="number"
+      />
+      {/* Sec */}
       <StyledButton type="submit" value="Set and Start" />
+      <div>{errors.inputMin ? <StyledError>{errors.inputMin}</StyledError> : 'min'}</div>
+      <div>{errors.inputSec ? <StyledError>{errors.inputSec}</StyledError> : 'sec'}</div>
     </StyledForm>
   );
 };
@@ -63,11 +68,13 @@ const StyledForm = styled.form`
   padding: 1em;
   width: 80%;
   margin: 0 auto;
-
-  display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 4px;
 `;
+
 const StyledInput = styled.input`
   margin-left: 1em;
   margin-right: 1em;
@@ -102,4 +109,9 @@ const StyledButton = styled.input`
     background-color: #ffe7b3;
     transition: background-color 0.4s;
   }
+`;
+
+const StyledError = styled.p`
+  font-size: 0.3em;
+  color: #fa3a11;
 `;
