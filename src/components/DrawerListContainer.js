@@ -27,10 +27,8 @@ export default function DrawerListContainer() {
 const StyledList = styled.div`
   width: 80%;
   height: calc(100% - 200px);
-  margin: 0 auto;
-  margin-bottom: 50px;
+  margin: auto;
   padding-top: 10px;
-  margin-top: 10px;
   overflow-y: scroll;
   border-radius: 20px;
   background-color: rgb(255, 207, 232, 0.5);
@@ -38,5 +36,3 @@ const StyledList = styled.div`
     height: calc(100% - 270px);
   }
 `;
-
-//

@@ -40,13 +40,26 @@ const StyledWrapper = styled.div`
     rgba(255, 57, 0, 1) 100%
   );
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  @media (max-width: 480px) {
+    height: 20px;
+    border-radius: 10px;
+  }
 `;
+
 const StyledPicture = styled.div`
   overflow: hidden;
   padding-left: 2em;
 
   img {
     border-radius: 50%;
+  }
+
+  @media (max-width: 480px) {
+    img {
+      height: 25px;
+      width: 25px;
+    }
   }
 `;
 const StyledDetail = styled.div`

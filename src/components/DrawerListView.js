@@ -24,4 +24,9 @@ const StyledDrawers = styled.div`
   padding: 10px;
   display: flex;
   justify-content: center;
+  @media (max-width: 480px) {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 `;

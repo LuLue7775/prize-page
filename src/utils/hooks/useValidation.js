@@ -5,14 +5,16 @@ export const useValidation = (options) => {
   const [errors, setErrors] = useState({});
   const [isValid, setValid] = useState(null);
 
-  const handleChange = (key, sanitizeFn) => (e) => {
-    const value = sanitizeFn ? sanitizeFn(e.target.value) : e.target.value;
+  // storing updated data into object for later
+  const handleChange = (key) => (e) => {
+    const value = e.target.value;
     setData({
       ...data,
       [key]: value
     });
   };
 
+  // validate on submit. validations are the rules set for input.
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validations = options?.validations;
@@ -31,12 +33,6 @@ export const useValidation = (options) => {
         if (pattern?.value && !RegExp(pattern.value).test(value)) {
           valid = false;
           newErrors[key] = pattern.message;
-        }
-
-        const custom = validation?.custom;
-        if (custom?.isValid && !custom.isValid(value)) {
-          valid = false;
-          newErrors[key] = custom.message;
         }
       }
 
@@ -59,6 +55,7 @@ export const useValidation = (options) => {
     handleChange,
     handleSubmit,
     errors,
-    isValid
+    isValid,
+    setValid
   };
 };

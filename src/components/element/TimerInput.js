@@ -1,12 +1,11 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useValidation } from '../../utils/hooks/useValidation';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
 const TimerInput = ({ startCount }) => {
-  const { data, handleChange, handleSubmit, errors, isValid } = useValidation({
+  const { data, handleChange, handleSubmit, errors, isValid, setValid } = useValidation({
     validations: {
       inputMin: {
         pattern: {
@@ -25,32 +24,26 @@ const TimerInput = ({ startCount }) => {
 
   useEffect(() => {
     if (!isValid) return;
-
     startCount(data.inputMin, data.inputSec);
+    setValid(false);
   }, [isValid]);
 
   return (
     <StyledForm className="time-input" onSubmit={handleSubmit}>
       <StyledInput
         name="userInputMin"
-        value={data.inputMin}
+        value={data.inputMin || ''}
         onChange={handleChange('inputMin')}
         required
-        min="0"
-        max="59"
-        type="number"
+        placeholder="0"
       />
-      {/* Min */}
       <StyledInput
         name="userInputSec"
-        value={data.inputSec}
+        value={data.inputSec || ''}
         onChange={handleChange('inputSec')}
         required
-        min="0"
-        max="59"
-        type="number"
+        placeholder="0"
       />
-      {/* Sec */}
       <StyledButton type="submit" value="Set and Start" />
       <div>{errors.inputMin ? <StyledError>{errors.inputMin}</StyledError> : 'min'}</div>
       <div>{errors.inputSec ? <StyledError>{errors.inputSec}</StyledError> : 'sec'}</div>
