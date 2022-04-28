@@ -18,6 +18,6 @@ This is a prize drawing app built with React and Redux. Written in Container/Vie
 
 Updated Bug fixes:
 - Major issue of countdown failure.
-- Validation added: 使用者輸入驗證，後端拉進來的資料驗證
+- Validation added: 使用者輸入驗證
 - List content made smaller on mobile
 
