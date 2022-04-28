@@ -27,8 +27,7 @@ const StyledAppWrapper = styled.div`
   text-align: center;
   background: rgb(252, 173, 54);
   height: 100vh;
-
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   display: grid;
   align-content: space-between;
