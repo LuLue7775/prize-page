@@ -5,7 +5,6 @@ import WinnerModalView from './components/modal/WinnerModalView';
 import styled from 'styled-components';
 
 function App() {
-  screen.orientation.lock('portrait');
   return (
     <StyledAppWrapper className="App">
       <StyledHeader className="App-header">
