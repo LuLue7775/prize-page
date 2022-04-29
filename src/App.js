@@ -1,12 +1,14 @@
-// import './App.css';
 import TimerView from './components/TimerView';
 import DrawerListContainer from './components/DrawerListContainer';
 import WinnerModalView from './components/modal/WinnerModalView';
 import styled from 'styled-components';
+import useWindowSize from './utils/hooks/useWindowSize';
 
 function App() {
+  const windowSize = useWindowSize();
+
   return (
-    <StyledAppWrapper className="App">
+    <StyledAppWrapper className="App" screenWidth={windowSize.width}>
       <StyledHeader className="App-header">
         <StyledTitle> LUCKY DRAW </StyledTitle>
       </StyledHeader>
@@ -27,7 +29,7 @@ const StyledAppWrapper = styled.div`
   text-align: center;
   background: rgb(252, 173, 54);
   height: 100vh;
-  width: 100vw;
+  width: ${({ screenWidth }) => screenWidth}px;
   overflow: hidden;
   display: grid;
   align-content: space-between;
